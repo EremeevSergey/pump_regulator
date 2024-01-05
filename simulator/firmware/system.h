@@ -5,6 +5,7 @@
 #include "timer.h"
 #include "sensor.h"
 #include "relay.h"
+#include "button.h"
 
 namespace MCU {
 
@@ -33,7 +34,8 @@ private:
     enum EState{
         EStateReset = 0,
         EStartRGBBlink,
-        EMainLoop
+        EMainLoopAuto,
+        EMainLoopManual,
     };
 
     /*!
@@ -46,16 +48,22 @@ private:
     /*!
      * \brief Основной цикл работы устройства
      */
-    void       mainLoop();
+    void       mainLoop      ();
+    void       mainLoopAuto  (bool hi,bool low);
+    void       mainLoopManual();
+    void       switchToAuto  ();
+    void       switchToManual();
 private:
     EState         m_State;
     CTimer         m_SysTimer;
-    CRgbLed        m_Sensor1Led;
-    CRgbLed        m_Sensor2Led;
+    CRgbLed        m_SensorLowLed;
+    CRgbLed        m_SensorHiLed;
     CRgbLed        m_MainLed;
-    CSensor        m_SensorHi;
     CSensor        m_SensorLow;
+    CSensor        m_SensorHi;
     CRelay         m_Relay;
+    CButton        m_ButtonLow;
+    CButton        m_ButtonHi;
 private:
     CTimer::Id_t  m_TimerRgb;
     CTimer::Id_t  m_TimerMainLoop;

@@ -33,6 +33,8 @@ class CWaterTank : public QWidget
 {
     Q_OBJECT
 public:
+    constexpr static int   WaterDeltaValue    = 1;//!< На сколько будет изменяться уровень воды
+
     explicit CWaterTank(QWidget *parent = nullptr);
     CWaterTank(const CWaterTank& )=delete;
     CWaterTank(      CWaterTank&&)=delete;

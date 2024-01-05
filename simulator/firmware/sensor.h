@@ -13,7 +13,8 @@ public:
         NormalClosed,
     };
 
-    CSensor(int port);
+    CSensor(TPortBit m_PortBit):CSensor(m_PortBit.Port,m_PortBit.Bit){}
+    CSensor(TPort m_Port,TBit m_PortBit);
     void init();
     void tick();
 

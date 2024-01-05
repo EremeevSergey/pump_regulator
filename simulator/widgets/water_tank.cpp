@@ -13,10 +13,6 @@ constexpr int WaterDeltaTimerPeriod = 500; //!< Таймер по котором
 constexpr float WaterWaveAmplitude = 2;//!< Амплитуда (в %) волны
 constexpr int   WaterWaveCount     = 2;//!< Кол-во волн (горбов) на ширину бака
 
-constexpr int   WaterDeltaValue    = 0;//!< На сколько будет изменяться уровень воды
-
-
-
 CWaterTank::CWaterTank(QWidget *parent)
     : QWidget{parent}
     , Sensors_{}

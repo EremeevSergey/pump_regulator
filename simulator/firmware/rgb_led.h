@@ -7,6 +7,18 @@ namespace MCU{
 class CRgbLed
 {
 public:
+    struct TColor{
+        EPortState Red;
+        EPortState Green;
+        EPortState Blue;
+    };
+
+    constexpr static TColor Red  {EPortState::On ,EPortState::Off,EPortState::Off};
+    constexpr static TColor Green{EPortState::Off,EPortState::On ,EPortState::Off};
+    constexpr static TColor Blue {EPortState::Off,EPortState::Off,EPortState::On };
+
+public:
+    CRgbLed(TColor color):CRgbLed(color.Red,color.Green,color.Blue){}
     CRgbLed(int red_pin,int green_pin,int blue_pin);
     void init();
     void tick();
@@ -33,6 +45,7 @@ public:
     void blueOff (){portBSequence_.off();}
     void blueOn  (){portBSequence_.on ();}
 
+    void set(TColor color){set(color.Red,color.Green,color.Blue);}
     void set(EPortState red,EPortState green,EPortState blue){
         portRSequence_.set(red);portGSequence_.set(green);portBSequence_.set(blue);
     }

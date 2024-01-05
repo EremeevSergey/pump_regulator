@@ -4,8 +4,8 @@
 
 namespace MCU{
 
-CSensor::CSensor(int port)
-    : port_  {port}
+CSensor::CSensor(TPort m_Port, TBit m_PortBit)
+    : port_  {m_Port,m_PortBit}
     , type_  {NormalOpen}
     , enable_{true}
     , state_ {EPortState::Off}
@@ -21,6 +21,7 @@ void CSensor::invertType()
 void CSensor::init()
 {
     port_.init(PORT_INPUT,PORT_PULL_UP);
+    type_ = NormalOpen;
 }
 
 void CSensor::tick()

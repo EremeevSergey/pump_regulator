@@ -43,6 +43,10 @@ public:
     bool getButton2State   ();
 private slots:
     void on_btPower_toggled(bool checked);
+    void on_btSensor1_toggled(bool checked);
+
+    void on_btSensor2_toggled(bool checked);
+
 private:
     Ui::regulator_widget *ui;
     CRgbLedWidget        *SensorLed1_;

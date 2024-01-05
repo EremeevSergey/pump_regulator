@@ -20,10 +20,10 @@ CRegulatorWidget::CRegulatorWidget(QWidget *parent)
     setWidgetTo(SensorLed2_,ui->wSensor2);
     setWidgetTo(WorkingLed_,ui->wLedMain);
 
-    connect(ui->btSensor1,SIGNAL(pressed ()),this,SIGNAL(button1Pressed ()));
-    connect(ui->btSensor1,SIGNAL(released()),this,SIGNAL(button1Released()));
-    connect(ui->btSensor2,SIGNAL(pressed ()),this,SIGNAL(button2Pressed ()));
-    connect(ui->btSensor2,SIGNAL(released()),this,SIGNAL(button2Released()));
+//    connect(ui->btSensor1,SIGNAL(pressed ()),this,SIGNAL(button1Pressed ()));
+//    connect(ui->btSensor1,SIGNAL(released()),this,SIGNAL(button1Released()));
+//    connect(ui->btSensor2,SIGNAL(pressed ()),this,SIGNAL(button2Pressed ()));
+//    connect(ui->btSensor2,SIGNAL(released()),this,SIGNAL(button2Released()));
     updateUi();
 }
 
@@ -38,6 +38,14 @@ void CRegulatorWidget::updateUi()
     ui->regulatorFrame->setEnabled(en);
     if (en) ui->btPower->setText("Вкл.\n");
     else    ui->btPower->setText("\nВыкл.");
+
+    if (ui->btSensor1->isDown() || ui->btSensor1->isChecked())
+          ui->btSensor1->setText("Вкл.\n");
+    else  ui->btSensor1->setText("\nВыкл.");
+
+    if (ui->btSensor2->isDown() || ui->btSensor2->isChecked())
+          ui->btSensor2->setText("Вкл.\n");
+    else  ui->btSensor2->setText("\nВыкл.");
 }
 
 void CRegulatorWidget::on_btPower_toggled(bool checked)
@@ -47,9 +55,17 @@ void CRegulatorWidget::on_btPower_toggled(bool checked)
     else         emit powerOff();
 }
 
-bool CRegulatorWidget::getButton1State (){return ui->btSensor1->isChecked();}
+void CRegulatorWidget::on_btSensor1_toggled(bool){ updateUi();}
+void CRegulatorWidget::on_btSensor2_toggled(bool){ updateUi();}
 
-bool CRegulatorWidget::getButton2State (){return ui->btSensor2->isChecked();}
+
+bool CRegulatorWidget::getButton1State (){return ui->btSensor1->isDown() || ui->btSensor1->isChecked();}
+
+bool CRegulatorWidget::getButton2State (){return ui->btSensor2->isDown() || ui->btSensor2->isChecked();}
+
+
+
+
 
 }//namespace GUI
 

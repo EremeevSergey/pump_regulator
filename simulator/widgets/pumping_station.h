@@ -1,6 +1,6 @@
 #ifndef PUMPING_STATION_H
 #define PUMPING_STATION_H
-
+#include <QCheckBox>
 #include "widgets/pump_widget.h"
 #include "widgets/water_tank.h"
 
@@ -17,8 +17,13 @@ public:
 private:
     CPumpWidget *Pump_;
     CWaterTank  *Tank_;
+    QCheckBox   *WaterCheckBox;
+
+    void updateUi();
 signals:
     void sensorChange(int level,bool state);
+private slots:
+    void waterOnOff();
 public slots:
     void doWork   ();
 };

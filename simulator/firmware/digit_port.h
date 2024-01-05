@@ -9,18 +9,20 @@ class CDigitPort
 {
 public:
 
-    CDigitPort(int pin):m_Pin(pin){}
-    bool         init  (int mode,int pull) {return HW_InitPortBit(m_Pin,mode,pull);}
-    void         set   ()         {HW_SetPortBit  (m_Pin);}
-    void         reset ()         {HW_ResetPortBit(m_Pin);}
-    EPortState   get   ()         {return HW_GetPortBit(m_Pin);}
+    CDigitPort(TPortBit m_PortBit):CDigitPort(m_PortBit.Port,m_PortBit.Bit){}
+    CDigitPort(TPort port,TBit bit):m_Port(port),m_PortBit{bit}{}
+    bool         init  (int mode,int pull) {return HW_InitPortBit(m_Port,m_PortBit,mode,pull);}
+    void         set   ()         {HW_SetPortBit  (m_Port,m_PortBit);}
+    void         reset ()         {HW_ResetPortBit(m_Port,m_PortBit);}
+    EPortState   get   ()         {return HW_GetPortBit(m_Port,m_PortBit);}
     void         set   (EPortState value){
-      if (value==On) HW_SetPortBit  (m_Pin);
-      else           HW_ResetPortBit(m_Pin);
+      if (value==On) HW_SetPortBit  (m_Port,m_PortBit);
+      else           HW_ResetPortBit(m_Port,m_PortBit);
       }
 
 private:
-    int m_Pin;
+    TPort m_Port;
+    TBit  m_PortBit;
 };
 
 struct TPortSequenceItem{

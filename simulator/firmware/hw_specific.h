@@ -4,12 +4,23 @@
 
 namespace MCU{
 
+using TPort  = void*;
+using TBit   = int;
+
+struct TPortBit{
+    TPort Port;
+    TBit  Bit;
+};
+
 enum EPortState{
     On=0,
     Off,
 };
 
 extern EPortState operator!(EPortState oth);
+
+constexpr TPort  NoPort = nullptr;
+
 
 }//namespace MCU
 
@@ -27,31 +38,45 @@ extern void HW_MkInit();
 //============================================================================//
 //                              Цифровые порты                                //
 //============================================================================//
+
+extern void HW_PinToPortdata(int pin,MCU::TPort& dst_port,MCU::TBit& dst_bit);
+
+inline void HW_PinToPortdata(int pin,MCU::TPortBit& dst){
+    return HW_PinToPortdata(pin,(dst.Port),(dst.Bit));
+}
+
+inline MCU::TPortBit HW_PinToPortdata(int pin){
+    MCU::TPortBit ret;
+    HW_PinToPortdata(pin,ret);
+    return ret;
+}
+
+
 /*!
  * \brief Настроить соответствующий вывод порта
  * \param bit    вывод порта
  * \param config конфигурация вывода порта
  * \return \b true если всё прошло успешно, иначе \b false
  */
-extern bool HW_InitPortBit (int bit,int config,int pull);
+extern bool HW_InitPortBit (MCU::TPort port, MCU::TBit bit,int config,int pull);
 
 /*!
  * \brief Установить выход порта в 1
  * \param bit    вывод порта
  */
-extern void HW_SetPortBit  (int bit);
+extern void HW_SetPortBit  (MCU::TPort port, MCU::TBit bit);
 
 /*!
  * \brief Установить выход порта в 0
  * \param bit    вывод порта
  */
-extern void HW_ResetPortBit(int bit);
+extern void HW_ResetPortBit(MCU::TPort port, MCU::TBit bit);
 
 /*!
  * \brief Прочитать состояние порта
  * \param bit    вывод порта
  */
-extern MCU::EPortState HW_GetPortBit(int bit);
+extern MCU::EPortState HW_GetPortBit(MCU::TPort port, MCU::TBit bit);
 
 // ------------------------- Конфигурация портов ---------------------------- //
 #define PORT_INPUT      0 // Вход

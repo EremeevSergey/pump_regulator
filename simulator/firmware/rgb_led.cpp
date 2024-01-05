@@ -3,9 +3,9 @@
 namespace MCU{
 
 CRgbLed::CRgbLed(int red_pin,int green_pin,int blue_pin)
-    : portR_{red_pin  }
-    , portG_{green_pin}
-    , portB_{blue_pin }
+    : portR_{HW_PinToPortdata(red_pin)}
+    , portG_{HW_PinToPortdata(green_pin)}
+    , portB_{HW_PinToPortdata(blue_pin)}
     , portRSequence_{portR_}
     , portGSequence_{portG_}
     , portBSequence_{portB_}

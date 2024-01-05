@@ -5,8 +5,8 @@
 #include <QTimerEvent>
 #include <cassert>
 #include "utils.h"
-#include "regulator/config.h"
-#include "regulator/system.h"
+#include "firmware/config.h"
+#include "firmware/system.h"
 #include "simulator.h"
 
 GUI::CSimulator* Simulator{nullptr};
@@ -15,16 +15,23 @@ void HW_MkInit(){
     Simulator->init();
 }
 
-bool HW_InitPortBit (int bit,int config,int pull){
-Q_UNUSED(bit);
-Q_UNUSED(config);
-Q_UNUSED(pull);
-return true;
+void HW_PinToPortdata(int pin,MCU::TPort& dst_port,MCU::TBit& dst_bit)
+{
+    dst_port = nullptr;
+    dst_bit = pin;
 }
 
-void HW_SetPortBit   (int bit){ Simulator->HW_SetPortBit  (bit);}
-void HW_ResetPortBit (int bit){ Simulator->HW_ResetPortBit(bit);}
-MCU::EPortState HW_GetPortBit   (int bit){
+bool HW_InitPortBit (MCU::TPort port, MCU::TBit bit,int config,int pull){
+    Q_UNUSED(port);
+    Q_UNUSED(bit);
+    Q_UNUSED(config);
+    Q_UNUSED(pull);
+    return true;
+}
+
+void HW_SetPortBit   (MCU::TPort, MCU::TBit bit){ Simulator->HW_SetPortBit  (bit);}
+void HW_ResetPortBit (MCU::TPort, MCU::TBit bit){ Simulator->HW_ResetPortBit(bit);}
+MCU::EPortState HW_GetPortBit   (MCU::TPort, MCU::TBit bit){
     if (Simulator->HW_GetPortBit(bit))
         return MCU::On;
     return     MCU::Off;
@@ -81,8 +88,9 @@ CSimulator::~CSimulator()
 
 void CSimulator::powerOn()
 {
+    using namespace MCU;
     if (SystemTimerId_==0) SystemTimerId_=startTimer(MAIN_TIMER/1000); //!< миллисекунды 1000/1000 = 1 мсек
-    MCU::System.init();
+    System.init();
 }
 
 void CSimulator::powerOff()
@@ -97,14 +105,16 @@ void CSimulator::init()
 
 void CSimulator::timerEvent(QTimerEvent *event)
 {
+    using namespace MCU;
     if (event!=nullptr && event->timerId()==SystemTimerId_){
         HW_MainSystemTimerFlag++;
-        MCU::System.tick();
+        System.tick();
     }
 }
 
 void CSimulator::HW_SetPortBit  (int bit)
 {
+    using namespace MCU;
     switch (bit) {
     case SENSOR1_LED_RED_PIN  : Regulator_->sensor1LedRedOn  (); break;
     case SENSOR1_LED_GREEN_PIN: Regulator_->sensor1LedGreenOn(); break;
@@ -125,6 +135,7 @@ void CSimulator::HW_SetPortBit  (int bit)
 
 void CSimulator::HW_ResetPortBit (int bit)
 {
+    using namespace MCU;
     switch (bit) {
     case SENSOR1_LED_RED_PIN  : Regulator_->sensor1LedRedOff  (); break;
     case SENSOR1_LED_GREEN_PIN: Regulator_->sensor1LedGreenOff(); break;
@@ -135,21 +146,19 @@ void CSimulator::HW_ResetPortBit (int bit)
     case MAIN_LED_RED_PIN     : Regulator_->mainLedRedOff     (); break;
     case MAIN_LED_GREEN_PIN   : Regulator_->mainLedGreenOff   (); break;
     case MAIN_LED_BLUE_PIN    : Regulator_->mainLedBlueOff    (); break;
-    case RELAY_OUT_PIN         : PumpingStation_->switchOff    (); break;
+    case RELAY_OUT_PIN        : PumpingStation_->switchOff    (); break;
     default:
         assert(false);
         break;
     }
 }
 
-#define SENSOR1_PIN 9
-#define SENSOR2_PIN 8
-
 bool CSimulator::HW_GetPortBit   (int bit)
 {
+    using namespace MCU;
     switch (bit) {
-    case BUTTON1_PIN: return Regulator_->getButton1State();
-    case BUTTON2_PIN: return Regulator_->getButton2State();
+    case BUTTON1_PIN: return !Regulator_->getButton1State();
+    case BUTTON2_PIN: return !Regulator_->getButton2State();
     case SENSOR1_PIN: return PumpingStation_->getSensorState(0);
     case SENSOR2_PIN: return PumpingStation_->getSensorState(1);
     default:

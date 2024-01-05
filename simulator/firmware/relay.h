@@ -7,7 +7,8 @@ namespace MCU{
 class CRelay
 {
 public:
-    CRelay(int pin):m_Port{pin},m_OldState{Off},m_HysteresisMsec{0},m_Countdown{0}{}
+    CRelay(TPortBit m_PortBit):CRelay(m_PortBit.Port,m_PortBit.Bit){}
+    CRelay(TPort m_Port, TBit m_PortBit):m_Port{m_Port,m_PortBit},m_OldState{Off},m_HysteresisMsec{0},m_Countdown{0}{}
     void init();
     void tick();
     void setHysteresisTime(int msec){m_HysteresisMsec = msec;}

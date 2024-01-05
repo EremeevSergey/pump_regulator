@@ -9,35 +9,39 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    firmware/settings.cpp \
     main.cpp \
     mainwindow.cpp \
-    regulator/relay.cpp \
-    regulator/sensor.cpp \
+    firmware/button.cpp \
+    firmware/relay.cpp \
+    firmware/sensor.cpp \
+    firmware/digit_port.cpp \
+    firmware/rgb_led.cpp \
+    firmware/system.cpp \
+    firmware/timer.cpp \
     widgets/pumping_station.cpp \
-    regulator/digit_port.cpp \
-    regulator/rgb_led.cpp \
-    regulator/system.cpp \
-    regulator/timer.cpp \
-    utils.cpp \
     widgets/pump_widget.cpp \
     widgets/regulator_widget.cpp \
     widgets/rgb_led_widget.cpp \
     widgets/sensor_dialog.cpp \
-    simulator.cpp \
-    widgets/water_tank.cpp
+    widgets/water_tank.cpp \
+    utils.cpp \
+    simulator.cpp
 
 HEADERS += \
+    firmware/button.h \
+    firmware/relay.h \
+    firmware/sensor.h \
+    firmware/config.h \
+    firmware/digit_port.h \
+    firmware/hw_specific.h \
+    firmware/rgb_led.h \
+    firmware/settings.h \
+    firmware/system.h \
+    firmware/timer.h \
     mainwindow.h \
-    regulator/relay.h \
-    regulator/sensor.h \
-    widgets/pumping_station.h \
-    regulator/config.h \
-    regulator/digit_port.h \
-    regulator/hw_specific.h \
-    regulator/rgb_led.h \
-    regulator/system.h \
-    regulator/timer.h \
     utils.h \
+    widgets/pumping_station.h \
     widgets/pump_widget.h \
     widgets/regulator_widget.h \
     widgets/rgb_led_widget.h \
