@@ -4,9 +4,10 @@
 #include <QSpacerItem>
 #include <QTimerEvent>
 #include <cassert>
+#include <iostream>
 #include "utils.h"
-#include "firmware/config.h"
-#include "firmware/system.h"
+#include "config.h"
+#include "system.h"
 #include "simulator.h"
 
 GUI::CSimulator* Simulator{nullptr};
@@ -33,13 +34,23 @@ void HW_SetPortBit   (MCU::TPort, MCU::TBit bit){ Simulator->HW_SetPortBit  (bit
 void HW_ResetPortBit (MCU::TPort, MCU::TBit bit){ Simulator->HW_ResetPortBit(bit);}
 MCU::EPortState HW_GetPortBit   (MCU::TPort, MCU::TBit bit){
     if (Simulator->HW_GetPortBit(bit))
-        return MCU::On;
-    return     MCU::Off;
+        return MCU::Off;
+    return     MCU::On;
 }
 
 int HW_MainSystemTimerFlag;
 
 bool HW_TimerInit (){return true;}
+
+void HW_EepromInit  (){Simulator->EEPROM.init();}
+void HW_EepromClear (){Simulator->EEPROM.clear();}
+bool HW_EepromRead (std::uint16_t address,std::uint16_t& data){
+    return Simulator->EEPROM.Read(address,data);
+}
+
+bool HW_EepromWrite(std::uint16_t address,std::uint16_t  data){
+    return Simulator->EEPROM.Write(address,data);
+}
 
 namespace GUI {
 
@@ -116,17 +127,16 @@ void CSimulator::HW_SetPortBit  (int bit)
 {
     using namespace MCU;
     switch (bit) {
-    case SENSOR1_LED_RED_PIN  : Regulator_->sensor1LedRedOn  (); break;
-    case SENSOR1_LED_GREEN_PIN: Regulator_->sensor1LedGreenOn(); break;
-    case SENSOR1_LED_BLUE_PIN : Regulator_->sensor1LedBlueOn (); break;
-    case SENSOR2_LED_RED_PIN  : Regulator_->sensor2LedRedOn  (); break;
-    case SENSOR2_LED_GREEN_PIN: Regulator_->sensor2LedGreenOn(); break;
-    case SENSOR2_LED_BLUE_PIN : Regulator_->sensor2LedBlueOn (); break;
-    case MAIN_LED_RED_PIN     : Regulator_->mainLedRedOn     (); break;
-    case MAIN_LED_GREEN_PIN   : Regulator_->mainLedGreenOn   (); break;
-    case MAIN_LED_BLUE_PIN    : Regulator_->mainLedBlueOn    (); break;
-    case RELAY_OUT_PIN         :
-        PumpingStation_->switchOn    (); break;
+    case SENSOR1_LED_RED_PIN  : return Regulator_->sensor1LedRedOn  ();
+    case SENSOR1_LED_GREEN_PIN: return Regulator_->sensor1LedGreenOn();
+    case SENSOR1_LED_BLUE_PIN : return Regulator_->sensor1LedBlueOn ();
+    case SENSOR2_LED_RED_PIN  : return Regulator_->sensor2LedRedOn  ();
+    case SENSOR2_LED_GREEN_PIN: return Regulator_->sensor2LedGreenOn();
+    case SENSOR2_LED_BLUE_PIN : return Regulator_->sensor2LedBlueOn ();
+    case MAIN_LED_RED_PIN     : return Regulator_->mainLedRedOn     ();
+    case MAIN_LED_GREEN_PIN   : return Regulator_->mainLedGreenOn   ();
+    case MAIN_LED_BLUE_PIN    : return Regulator_->mainLedBlueOn    ();
+    case RELAY_OUT_PIN        : return PumpingStation_->switchOn    ();
     default:
         assert(false);
         break;
@@ -137,16 +147,16 @@ void CSimulator::HW_ResetPortBit (int bit)
 {
     using namespace MCU;
     switch (bit) {
-    case SENSOR1_LED_RED_PIN  : Regulator_->sensor1LedRedOff  (); break;
-    case SENSOR1_LED_GREEN_PIN: Regulator_->sensor1LedGreenOff(); break;
-    case SENSOR1_LED_BLUE_PIN : Regulator_->sensor1LedBlueOff (); break;
-    case SENSOR2_LED_RED_PIN  : Regulator_->sensor2LedRedOff  (); break;
-    case SENSOR2_LED_GREEN_PIN: Regulator_->sensor2LedGreenOff(); break;
-    case SENSOR2_LED_BLUE_PIN : Regulator_->sensor2LedBlueOff (); break;
-    case MAIN_LED_RED_PIN     : Regulator_->mainLedRedOff     (); break;
-    case MAIN_LED_GREEN_PIN   : Regulator_->mainLedGreenOff   (); break;
-    case MAIN_LED_BLUE_PIN    : Regulator_->mainLedBlueOff    (); break;
-    case RELAY_OUT_PIN        : PumpingStation_->switchOff    (); break;
+    case SENSOR1_LED_RED_PIN  : return Regulator_->sensor1LedRedOff  ();
+    case SENSOR1_LED_GREEN_PIN: return Regulator_->sensor1LedGreenOff();
+    case SENSOR1_LED_BLUE_PIN : return Regulator_->sensor1LedBlueOff ();
+    case SENSOR2_LED_RED_PIN  : return Regulator_->sensor2LedRedOff  ();
+    case SENSOR2_LED_GREEN_PIN: return Regulator_->sensor2LedGreenOff();
+    case SENSOR2_LED_BLUE_PIN : return Regulator_->sensor2LedBlueOff ();
+    case MAIN_LED_RED_PIN     : return Regulator_->mainLedRedOff     ();
+    case MAIN_LED_GREEN_PIN   : return Regulator_->mainLedGreenOff   ();
+    case MAIN_LED_BLUE_PIN    : return Regulator_->mainLedBlueOff    ();
+    case RELAY_OUT_PIN        : return PumpingStation_->switchOff    ();
     default:
         assert(false);
         break;
@@ -157,8 +167,8 @@ bool CSimulator::HW_GetPortBit   (int bit)
 {
     using namespace MCU;
     switch (bit) {
-    case BUTTON1_PIN: return !Regulator_->getButton1State();
-    case BUTTON2_PIN: return !Regulator_->getButton2State();
+    case BUTTON1_PIN: return Regulator_->getButton1State();
+    case BUTTON2_PIN: return Regulator_->getButton2State();
     case SENSOR1_PIN: return PumpingStation_->getSensorState(0);
     case SENSOR2_PIN: return PumpingStation_->getSensorState(1);
     default:

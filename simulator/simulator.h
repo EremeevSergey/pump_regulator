@@ -2,6 +2,7 @@
 #define SIMULATOR_H
 #include "widgets/regulator_widget.h"
 #include "widgets/pumping_station.h"
+#include "widgets/veeprom.h"
 
 namespace GUI {
 
@@ -18,6 +19,7 @@ public:
     void HW_ResetPortBit (int bit);
     bool HW_GetPortBit(int bit);
 
+    CVirtualEEPROM EEPROM;
 protected:
     virtual void timerEvent(QTimerEvent *event) override;
 private:

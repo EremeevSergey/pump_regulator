@@ -59,9 +59,13 @@ void CRegulatorWidget::on_btSensor1_toggled(bool){ updateUi();}
 void CRegulatorWidget::on_btSensor2_toggled(bool){ updateUi();}
 
 
-bool CRegulatorWidget::getButton1State (){return ui->btSensor1->isDown() || ui->btSensor1->isChecked();}
+bool CRegulatorWidget::getButton1State (){
+    return ui->btSensor1->isDown() || ui->btSensor1->isChecked();
+}
 
-bool CRegulatorWidget::getButton2State (){return ui->btSensor2->isDown() || ui->btSensor2->isChecked();}
+bool CRegulatorWidget::getButton2State (){
+    return ui->btSensor2->isDown() || ui->btSensor2->isChecked();
+}
 
 
 
