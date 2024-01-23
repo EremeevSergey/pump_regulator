@@ -1,3 +1,4 @@
+#include <cstdint>
 #include "stm32f0xx.h"
 #include "stm32f0xx_hal.h"
 #include "stm32f0xx_hal_cortex.h"
@@ -131,12 +132,21 @@ bool HW_TimerInit (){
 //============================================================================//
 //                                     EEPROM                                 //
 //============================================================================//
-int HW_EepromRead (void* /*data*/,int length){
-	return length;
+void HW_EepromInit  (){
+
 }
 
-int HW_EepromWrite(void* /*data*/,int length){
-	return length;
+void HW_EepromClear (){
+
 }
+
+bool HW_EepromRead (std::uint16_t address,std::uint16_t& data){
+
+}
+
+bool HW_EepromWrite(std::uint16_t address,std::uint16_t  data){
+
+}
+
 
 
