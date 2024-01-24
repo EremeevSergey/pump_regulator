@@ -2,8 +2,11 @@
 #include "stm32f0xx.h"
 #include "stm32f0xx_hal.h"
 #include "stm32f0xx_hal_cortex.h"
-#include "hw_specific.h"
-#include "config.h"
+#include "system/config.h"
+#include "system/hw_specific.h"
+#include "system/settings.h"
+#include "eeprom/src/flash_eeprom.h"
+
 
 //============================================================================//
 //                              Система глобально                             //
@@ -132,20 +135,56 @@ bool HW_TimerInit (){
 //============================================================================//
 //                                     EEPROM                                 //
 //============================================================================//
-void HW_EepromInit  (){
+/*!
+ * \brief Функция, стирающая странице во внутренней флэш-памяти.
+ * \details Её надо где-то в проекте определить (на базе STL, HAL, CMSIS...)
+ * \param addr - адрес начала стираемой страницы
+ * \return \b true  в случае удачи, иначе \b false
+ */
+bool FLASH_ErasePage(void* addr){
+	HAL_FLASH_Unlock();
+	FLASH_EraseInitTypeDef str{FLASH_TYPEERASE_PAGES,reinterpret_cast<std::uint32_t>(addr),1};
+	uint32_t PageError;
+	bool ret = HAL_FLASHEx_Erase(&str,&PageError)==HAL_OK;
+	HAL_FLASH_Lock();
+	return ret;
+}
 
+/*!
+ * \brief Функция, записывающая во внутреннюю флэш-память полу-слово (16 бит)
+ * \param address Адрес во флэш-памяти
+ * \param data    аписываемое значение (16 бит)
+ * \return \b true  в случае удачи, иначе \b false
+ */
+bool FLASH_ProgramHalfWord(void* address,std::uint16_t data){
+	HAL_FLASH_Unlock();
+	bool ret = HAL_FLASH_Program(FLASH_TYPEPROGRAM_HALFWORD, reinterpret_cast<std::uint32_t>(address), data)==HAL_OK;
+	HAL_FLASH_Lock();
+	return ret;
+}
+
+void* EEPROM_START_ADDRESS = reinterpret_cast<void*>(0x08003800); // Начальный адрес EEPROM
+constexpr int    PAGE_SIZE = 0x0400; // Размер страницы 1 кбайт
+CFlashEeprom<MCU::CSettings::AddressCount> EEPROM(EEPROM_START_ADDRESS,PAGE_SIZE);
+
+void HW_EepromInit  (){
+	EEPROM.Init();
 }
 
 void HW_EepromClear (){
+	EEPROM.Format();
+}
 
+void HW_EepromReservAddress(std::uint16_t address){
+	EEPROM.AddVirtualAddrress(address);
 }
 
 bool HW_EepromRead (std::uint16_t address,std::uint16_t& data){
-
+	return EEPROM.ReadVariable(address,data);
 }
 
 bool HW_EepromWrite(std::uint16_t address,std::uint16_t  data){
-
+	return EEPROM.WriteVariable(address,data);
 }
 
 

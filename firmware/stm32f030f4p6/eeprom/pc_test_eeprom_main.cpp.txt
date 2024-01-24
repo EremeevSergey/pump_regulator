@@ -1,0 +1,105 @@
+#include <cassert>
+#include <iostream>
+#include <algorithm>
+#include <random>
+#include <array>
+using namespace std;
+#include "src/flash_eeprom.h"
+
+constexpr int TestArraySize = 1000'0000;
+constexpr int PageSize      = 1024; // 1 кбайт
+constexpr int PageCount     = 2; // 2 страницы
+constexpr int Page0_Offset  = PageSize*14; // типа 14 кбайт
+std::array<std::uint8_t,TestArraySize> testArray;
+constexpr std::array<std::uint16_t,5> Addresses = {0x1122,0x3344,0x5566,0x7788,0x9900};
+std::array<std::uint16_t,Addresses.size()> Values;
+constexpr auto page0_address{testArray.data()+Page0_Offset};
+CFlashEeprom<Addresses.size()+5> EEPROM(page0_address,PageSize);
+
+std::uint16_t* toUint16Ptr(void* ptr){
+    return static_cast<std::uint16_t*>(ptr);
+}
+
+int returnError(const char* str){
+    std::cout << str << std::endl;
+    return -1;
+}
+
+bool TestAllClear(){
+    for (auto byte:testArray)
+        if (byte!=0xFF) return false;
+    return true;
+}
+
+/*!
+ * \brief Проверям, что не вышли за пределы страниц виртуальной EEPROM
+ * \return
+ */
+bool TestOutOfBounds(){
+    for (int i=0;i<Page0_Offset;++i) if (testArray[i]!=0xFF) return false;
+    for (int i=Page0_Offset+PageSize*PageCount;i<TestArraySize;++i) if (testArray[i]!=0xFF) return false;
+    return true;
+}
+
+bool TestInitEeprom(){
+    // Проверяем, что инициализация прошла успешно
+    if (*toUint16Ptr(page0_address)!=0x0000) return false;
+    if (*toUint16Ptr(page0_address+PageSize)!=0xFFFF) return false;
+    return true;
+}
+
+int main()
+{
+    // Запоняем "флэш" FF
+    for (auto& byte:testArray) byte = 0xFF;
+    if (!TestAllClear()) return returnError("Что-то флешка срезу не чистая!?!?");
+    EEPROM.Init();
+    for (auto addr:Addresses) EEPROM.AddVirtualAddrress(addr);
+    if (!TestOutOfBounds()) return returnError("Инициализация затерла другие страницы");
+    if (!TestInitEeprom ()) return returnError("Инициализация прошла с ошибкой");
+    // Теперь поназаписываем 1000 значний, и проверим, что последние записанные значения
+    // правильно считываются
+    std::mt19937  RndEngine_;
+    std::uniform_int_distribution<std::uint16_t> distribution(0,0xFFFF);
+    for (int i=0;i<1000000;++i){
+        // Заполняем переменные случайными значениями
+        for (auto& val: Values) val = distribution(RndEngine_);
+        for (decltype(Addresses.size()) j=0;j<Addresses.size();++j){
+            // Записываем и считываем
+            if (EEPROM.WriteVariable(Addresses[j],Values[j])!=true){
+                return returnError("Ошибка записи");
+            }
+            std::uint16_t data{0};
+            if (EEPROM.ReadVariable(Addresses[j],data)!=true){
+                return returnError("Ошибка чтения");
+            }
+            if (data!=Values[j]){
+                return returnError("Считали не то, что записали");
+            }
+        }
+    }
+    if (!TestOutOfBounds()) return returnError("Затерли чужую память");
+    std::cout << "All Ok." << std::endl;
+    return 0;
+}
+
+void ErasePage(void* addr,int size){
+    std::uint8_t* ptr = static_cast<std::uint8_t*>(addr);
+    for (int i=0;i<size;++i) *(ptr+i) = 0xFF;
+}
+
+bool FLASH_ErasePage(void* addr){
+    std::cout << "FLASH_ErasePage" << std::endl;
+    ErasePage(addr,PageSize);
+    return true;
+}
+
+bool FLASH_ProgramHalfWord(void* address,std::uint16_t data){
+    std::uint16_t* ptr = static_cast<std::uint16_t*>(address);
+    if ((*ptr)!=0xFFFF /*&& (*ptr)!=0xEEEE*/){
+        std::cout << std::hex <<  "not FFFF "  << (*ptr) << std::endl;
+        assert((*ptr)==0xEEEE);
+    }
+    *ptr = data;
+    return true;
+}

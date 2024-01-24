@@ -12,7 +12,11 @@ CSettings::CSettings()
 
 void CSettings::init()
 {
-    HW_EepromInit();
+	HW_EepromReservAddress(AddressCopy1);
+	HW_EepromReservAddress(AddressCopy2);
+	HW_EepromReservAddress(AddressCopy3);
+	HW_EepromInit();
+
 }
 
 std::uint16_t CSettings::SensorStateToWord()

@@ -44,6 +44,8 @@ bool HW_TimerInit (){return true;}
 
 void HW_EepromInit  (){Simulator->EEPROM.init();}
 void HW_EepromClear (){Simulator->EEPROM.clear();}
+void HW_EepromReservAddress([[maybe_unused]]std::uint16_t address){}
+
 bool HW_EepromRead (std::uint16_t address,std::uint16_t& data){
     return Simulator->EEPROM.Read(address,data);
 }

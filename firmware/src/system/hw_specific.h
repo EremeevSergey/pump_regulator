@@ -110,6 +110,7 @@ extern bool HW_TimerInit ();
 //============================================================================//
 extern void HW_EepromInit  ();
 extern void HW_EepromClear ();
+extern void HW_EepromReservAddress(std::uint16_t address);
 extern bool HW_EepromRead (std::uint16_t address,std::uint16_t& data);
 extern bool HW_EepromWrite(std::uint16_t address,std::uint16_t  data);
 
