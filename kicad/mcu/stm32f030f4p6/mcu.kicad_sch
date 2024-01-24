@@ -1731,6 +1731,11 @@
     (uuid ff3394de-50a2-4040-ba1b-5bee306388bc)
   )
 
+  (text "Корпус D2MG\nЦена 310р.\nhttps://www.chipdip.ru/product/d2mg?from=suggest_product\n"
+    (at 26.035 186.055 0)
+    (effects (font (size 1.27 1.27)) (justify left bottom))
+    (uuid 0bb4e5a4-f72a-4d16-b730-87d1171722dc)
+  )
   (text "RGB LED 5mA\nR - 1,88V R = 224 Om\nG - 2,48V R = 104 Om\nB - 2,68V R = 64 Om"
     (at 256.54 24.13 0)
     (effects (font (size 1.27 1.27)) (justify left bottom))
