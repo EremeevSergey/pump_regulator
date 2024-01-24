@@ -4,7 +4,7 @@ namespace MCU{
 
 void CRelay::init()
 {
-    m_Port.init(PORT_OUTPUT_OD,PORT_NO_PULL);
+    m_Port.init(PORT_OUTPUT_PP,PORT_NO_PULL);
     m_OldState       = EPortState::Off;
     m_HysteresisMsec = 0;
     m_Countdown      = 0;
