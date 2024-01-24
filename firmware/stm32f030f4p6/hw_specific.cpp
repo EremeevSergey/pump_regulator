@@ -52,8 +52,8 @@ TPortBit pins_to_wh[]={
 		{NoPort, 0},// 16 pin
 		{GPIOA , GPIO_PIN_9},// 17 pin
 		{GPIOA ,GPIO_PIN_10},// 18 pin
-//		{GPIOA ,GPIO_PIN_13},// 19 pin
-		{NoPort, 0},// 19 pin //!< \todo заменить на предыдущий
+		{GPIOA ,GPIO_PIN_13},// 19 pin
+//		{NoPort, 0},// 19 pin //!< \todo заменить на предыдущий
 		{GPIOA ,GPIO_PIN_14} // 20 pin
 };
 
