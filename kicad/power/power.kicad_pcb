@@ -130,12 +130,7 @@
       (net 6 "Net-(C2-Pad1)") (pinfunction "P1") (pintype "passive") (tstamp b79e973a-9d10-4ddf-bd4c-064eedd1792c))
     (pad "2" thru_hole circle locked (at 2.54 0 180) (size 3 3) (drill 1.2) (layers *.Cu *.Mask "F.SilkS")
       (net 3 "GNDD") (pinfunction "PM") (pintype "passive") (tstamp 5254b62f-4fd9-40d4-bbf7-f5904032e6b0))
-    (model "/home/serg/projects/kicad_lib/разъемы/3d/KF128-2P.wrl"
-      (offset (xyz 0 0 0))
-      (scale (xyz 0.3937009871 0.3937009871 0.3937009871))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/разъемы/3d/KF128-2P.step"
+    (model "${KIPRJMOD}/Library.pretty/KF128-2P.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -165,17 +160,7 @@
       (net 1 "Net-(P1-Pad1)") (pinfunction "P1") (pintype "passive") (tstamp 2f5dbea4-c559-4378-9f5e-1a82f2faadce))
     (pad "2" thru_hole circle locked (at 2.54 0) (size 3 3) (drill 1.2) (layers *.Cu *.Mask "F.SilkS")
       (net 2 "Net-(P1-Pad2)") (pinfunction "PM") (pintype "passive") (tstamp af193d06-3c34-4d82-9780-c34ca76dadf8))
-    (model "/home/serg/projects/kicad_lib/разъемы/3d/KF128-2P.wrl" hide
-      (offset (xyz 0 0 0))
-      (scale (xyz 0.3937009871 0.3937009871 0.3937009871))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/разъемы/3d/KF128-2P.wrl" hide
-      (offset (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/разъемы/3d/KF128-2P.step"
+    (model "${KIPRJMOD}/Library.pretty/KF128-2P.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -500,12 +485,7 @@
       (net 7 "Net-(C3-Pad1)") (pinfunction "P1") (pintype "passive") (tstamp 6afe4e1a-1607-4ac6-8814-1d91c19036f4))
     (pad "2" thru_hole circle locked (at 2.54 0 180) (size 3 3) (drill 1.2) (layers *.Cu *.Mask "F.SilkS")
       (net 3 "GNDD") (pinfunction "PM") (pintype "passive") (tstamp 95001ea1-a44c-4629-9075-ca88e08e5dfd))
-    (model "/home/serg/projects/kicad_lib/разъемы/3d/KF128-2P.wrl"
-      (offset (xyz 0 0 0))
-      (scale (xyz 0.3937009871 0.3937009871 0.3937009871))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/разъемы/3d/KF128-2P.step"
+    (model "${KIPRJMOD}/Library.pretty/KF128-2P.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -538,8 +518,8 @@
       (net 8 "Net-(K1-Pad3)") (pinfunction "2") (pintype "passive") (tstamp f8ea123d-9052-444f-9189-cb11db0a105d))
     (pad "3" thru_hole circle locked (at 5.08 0) (size 3 3) (drill 1.2) (layers *.Cu *.Mask "F.SilkS")
       (net 9 "Net-(K1-Pad4)") (pinfunction "3") (pintype "passive") (tstamp 20b51b66-1188-4960-a5da-519cd07ca1be))
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/разъемы/3d/KF128-3P.step"
-      (offset (xyz -2.54 0 0))
+    (model "${KIPRJMOD}/Library.pretty/KF128-3P.step"
+      (offset (xyz -2.5 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
@@ -575,17 +555,7 @@
       (net 9 "Net-(K1-Pad4)") (pinfunction "out1") (pintype "input") (tstamp a089b0c3-680d-4640-a276-e483362c8386))
     (pad "5" thru_hole circle locked (at 6.05 6) (size 2.5 2.5) (drill 1) (layers *.Cu *.Mask "F.SilkS")
       (net 10 "Net-(K1-Pad5)") (pinfunction "out3") (pintype "input") (tstamp 25fc08bf-416c-4e3a-bc0f-a9e93cdf02f9))
-    (model "/home/serg/projects/kicad_lib/реле/3d/SRD-12VDC-SL-C.wrl" hide
-      (offset (xyz 0 0 0))
-      (scale (xyz 0.3937009871 0.3937009871 0.3937009871))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/реле/3d/SRD-12VDC-SL-C.wrl" hide
-      (offset (xyz 0 0 0))
-      (scale (xyz 1 1 1))
-      (rotate (xyz 0 0 0))
-    )
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/реле/3d/SRD-12VDC-SL-C.step"
+    (model "${KIPRJMOD}/Library.pretty/SRD-12VDC-SL-C.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -623,7 +593,7 @@
       (net 12 "Net-(BD1-Pad4)") (pintype "passive") (tstamp 082a3ac2-3d7c-49f5-bc51-6db83a5c7442))
     (pad "9" thru_hole circle (at -5 -10 270) (size 3 3) (drill 0.9) (layers *.Cu *.Mask)
       (net 11 "Net-(BD1-Pad3)") (pintype "passive") (tstamp 2bde3c9a-316f-4234-8d63-b327df3b6f00))
-    (model "/mnt/HPServer/Backup/projects/kicad_lib/трансформаторы/3d/ТПК-1.step"
+    (model "${KIPRJMOD}/Library.pretty/ТПК-1.step"
       (offset (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
