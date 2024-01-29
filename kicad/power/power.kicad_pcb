@@ -54,7 +54,7 @@
     (pad_to_mask_clearance 0)
     (grid_origin 181.25 86.24)
     (pcbplotparams
-      (layerselection 0x0000000_7fffffff)
+      (layerselection 0x00010f0_ffffffff)
       (disableapertmacros false)
       (usegerberextensions false)
       (usegerberattributes true)
@@ -80,11 +80,11 @@
       (plotinvisibletext false)
       (sketchpadsonfab false)
       (subtractmaskfromsilk false)
-      (outputformat 4)
-      (mirror true)
-      (drillshape 1)
+      (outputformat 1)
+      (mirror false)
+      (drillshape 0)
       (scaleselection 1)
-      (outputdirectory "")
+      (outputdirectory "gerber/")
     )
   )
 
@@ -995,6 +995,11 @@
       (net 11 "Net-(BD1-Pad3)") (pintype "passive") (tstamp 91c6f266-9a04-42c4-8774-c3f8347aaf95))
     (pad "4" smd rect (at 3 1.25) (size 2.4 0.9) (layers "B.Cu" "B.Paste" "B.Mask")
       (net 12 "Net-(BD1-Pad4)") (pintype "passive") (tstamp 57e9fb4b-a60f-4669-b0bd-2973fe421c16))
+    (model "${KIPRJMOD}/Library.pretty/Diode_Bridge_Diotec_MicroDil_3.0x3.0x1.8mm.step"
+      (offset (xyz 0 0 0))
+      (scale (xyz 1.2 1.9 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (footprint "Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm" (layer "B.Cu")

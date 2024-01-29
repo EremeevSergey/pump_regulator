@@ -10,6 +10,7 @@ CPumpWidget::CPumpWidget(QWidget *parent)
     , ui(new Ui::pump_widget)
     , WorkTimerId_{0}
     , Work_{false}
+    , invert_{false}
 {
     ui->setupUi(this);
     WorkTimerId_=startTimer(WorkTimerPeriod);
@@ -25,7 +26,9 @@ CPumpWidget::~CPumpWidget()
 void CPumpWidget::timerEvent(QTimerEvent *event)
 {
     if (event!=nullptr && event->timerId()==WorkTimerId_){
-        if (Work_ && ui->checkBox->isChecked())
+        bool work = Work_;
+        if (invert_) work=!work;
+        if (work && ui->checkBox->isChecked())
             emit doWork();
     }
 }
@@ -39,7 +42,9 @@ void CPumpWidget::updateUi()
 {
     bool en = ui->checkBox->isChecked();
     ui->labelState->setEnabled(en);
-    if (en && Work_){
+    bool work = Work_;
+    if (invert_) work=!work;
+    if (en && work){
         ui->labelState->setStyleSheet("QLabel { background-color : red; color : white; }");
         ui->labelState->setText("Вкл.");
     }
@@ -47,6 +52,14 @@ void CPumpWidget::updateUi()
         ui->labelState->setStyleSheet("QLabel { background-color : Window; color : WindowText; }");
         ui->labelState->setText("Выкл.");
     }
+}
+
+
+void CPumpWidget::on_cbInvers_stateChanged(int arg1)
+{
+    if (ui->cbInvers->isChecked()) invert_ = true;
+    else invert_=false;
+    updateUi();
 }
 
 }//namespace GUI

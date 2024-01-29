@@ -103,6 +103,7 @@ void CSimulator::powerOn()
 {
     using namespace MCU;
     if (SystemTimerId_==0) SystemTimerId_=startTimer(MAIN_TIMER/1000); //!< миллисекунды 1000/1000 = 1 мсек
+    PumpingStation_->switchOff();
     System.init();
 }
 
@@ -110,6 +111,7 @@ void CSimulator::powerOff()
 {
     if (SystemTimerId_!=0) killTimer(SystemTimerId_);
     SystemTimerId_ = 0;
+    PumpingStation_->switchOff();
 }
 
 void CSimulator::init()

@@ -22,6 +22,7 @@ private:
     Ui::pump_widget *ui;
     int WorkTimerId_;
     bool Work_;
+    bool invert_;
     void updateUi();
 public slots:
     void switchOn (){Work_=true ;updateUi();}
@@ -30,6 +31,7 @@ signals:
     void doWork   ();
 private slots:
     void on_checkBox_stateChanged(int arg1);
+    void on_cbInvers_stateChanged(int arg1);
 };
 
 }//namespace GUI

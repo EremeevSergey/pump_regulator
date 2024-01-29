@@ -18,12 +18,17 @@ private:
     CPumpWidget *Pump_;
     CWaterTank  *Tank_;
     QCheckBox   *WaterCheckBox;
+    QCheckBox   *InvertCheckBox;
+    QCheckBox   *InvertSensorsCheckBox;
+    int          delta_;
 
     void updateUi();
 signals:
     void sensorChange(int level,bool state);
 private slots:
     void waterOnOff();
+    void invertOnOff();
+    void invertSensorsOnOff();
 public slots:
     void doWork   ();
 };

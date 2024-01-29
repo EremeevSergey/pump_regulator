@@ -47,12 +47,14 @@ public:
     auto     getWaterDelta() const noexcept{return WaterDelta_;}
 
     bool     getSensorState(int index);
+
+    void     setReverseSensors(bool fl){reverseSensors_ = fl; update();}
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
     virtual void timerEvent(QTimerEvent *event) override;
     virtual void mouseDoubleClickEvent(QMouseEvent *event) override;
 private:
-    void     drawSensor(QPainter& painter, CSensor& sensor, int water_level);
+    void     drawSensor(QPainter& painter, CSensor& sensor, int index,int water_level);
     void     drawWater (QPainter& painter);
 private:
     std::vector<CSensor> Sensors_;
@@ -62,6 +64,7 @@ private:
     int WaterWaveTimerId_;
     int WaterDeltaTimerId_;
     int WaterDelta_;//!< Дельта, на которую будет увеличваться/ уменьшаться вода
+    bool reverseSensors_;
 signals:
     void sensorChange(int level,bool state);
 };

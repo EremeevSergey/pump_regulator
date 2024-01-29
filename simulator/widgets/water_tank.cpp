@@ -22,6 +22,7 @@ CWaterTank::CWaterTank(QWidget *parent)
     , WaterWaveTimerId_{0}
     , WaterDeltaTimerId_{0}
     , WaterDelta_{WaterDeltaValue}
+    , reverseSensors_{false}
 {
     WaterWaveTimerId_=startTimer(WaterWaveTimerPeriod);
     WaterDeltaTimerId_=startTimer(WaterDeltaTimerPeriod);
@@ -42,7 +43,9 @@ void CWaterTank::addSensor (CSensor sensor)
 
 bool CWaterTank::getSensorState(int index)
 {
-    if (index>=0 && static_cast<std::size_t>(index)<Sensors_.size()){
+    auto count = static_cast<int>(Sensors_.size());
+    if (index>=0 && index<count){
+        if (reverseSensors_) return Sensors_.at(count - index-1).getState();
         return Sensors_.at(index).getState();
     }
     return false;
@@ -81,7 +84,15 @@ void CWaterTank::paintEvent(QPaintEvent*)
                          QPoint(rect().width()-TankWallThickness/2,0+TankWallThickness/2));
     }painter.restore();
 
-    for (auto& sens:Sensors_) drawSensor(painter,sens,RightWallLevel_+0.5);
+    int index=0;
+    if (reverseSensors_){
+        std::for_each(Sensors_.rbegin(),Sensors_.rend(),[&index,&painter,this](auto& sens){
+            drawSensor(painter,sens,index++,RightWallLevel_+0.5);
+        });
+    }
+    else{
+        for (auto& sens:Sensors_) drawSensor(painter,sens,index++,RightWallLevel_+0.5);
+    }
 }
 
 void CWaterTank::drawWater (QPainter& painter)
@@ -104,7 +115,7 @@ namespace{
 constexpr int SensorLength = 15;//%
 }
 
-void CWaterTank::drawSensor(QPainter& painter,CSensor& sensor, int water_level)
+void CWaterTank::drawSensor(QPainter& painter,CSensor& sensor,int index, int water_level)
 {
     constexpr int SensorThickness = 5;
 
@@ -119,6 +130,8 @@ void CWaterTank::drawSensor(QPainter& painter,CSensor& sensor, int water_level)
         painter.setPen(pen);
         painter.drawLine(QPoint(rect().width()-length,rect().height()-height),
                          QPoint(rect().width()       ,rect().height()-height));
+        painter.setPen(Qt::black);
+        painter.drawText(QPoint(rect().width()-length,rect().height()-height-10),QString::number(index));
     }painter.restore();
     if (state!=sensor.State){
         emit sensorChange(sensor.Level,state);
