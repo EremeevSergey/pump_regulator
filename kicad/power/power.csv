@@ -1,0 +1,12 @@
+Item,Qty,Reference(s),Value,LibPart,Footprint,Datasheet,Qty,ChipDip,Цена,Стоимость,Aliexpress,Цена2,Стоимость
+1,1,BD1,MB10F,диоды:MB10F,диоды:MB-F,,1,https://www.chipdip.ru/product/mb10f-hottech,4,4,https://aliexpress.ru/item/1005002106188652.html?sku_id=12000018760217218&spm=a2g2w.productlist.search_results.0.4a91968eimyC6g,4,4
+2,1,C1,1000x25V,Device:C_Polarized_Small,Capacitor_THT:CP_Radial_D10.0mm_P5.00mm,~,1,https://www.chipdip.ru/product0/9000565924,18,18,https://www.chipdip.ru/product0/9000565924,18,18
+3,2,"C2, C3",??,Device:C_Small,Capacitor_SMD:C_1206_3216Metric,~,2,,,0,,,0
+4,5,"D1, D2, D3, D4, D5",M1,Device:D,Diode_SMD:D_SMA,~,5,https://www.chipdip.ru/product/m1-sunmate,3,15,https://aliexpress.ru/item/4000331358747.html?sku_id=10000001360601882&spm=a2g2w.productlist.search_results.3.47699fe0jfQz7n,"0,9","4,5"
+5,1,J1,Conn_01x05,Connector_Generic:Conn_01x05,Connector_JST:JST_EH_B5B-EH-A_1x05_P2.50mm_Vertical,~,1,https://aliexpress.ru/item/32701800317.html?spm=a2g2w.stores.seller_list.2.219951792o27y5&sku_id=61026197686,"3,2","3,2",https://aliexpress.ru/item/32701800317.html?spm=a2g2w.stores.seller_list.2.219951792o27y5&sku_id=61026197686,"3,2","3,2"
+6,4,"JP1, JP2, JP3, JP4",SolderJumper_2_Bridged,Jumper:SolderJumper_2_Bridged,Jumper:SolderJumper-2_P1.3mm_Bridged_Pad1.0x1.5mm,~,4,,0,0,,0,0
+7,1,K1,SRD-12VDC-SL-C,реле:Реле_2-3,реле:SRD-12VDC-SL-C,https://oskolchip.ru/datasheet/SRD-05-12-24VDC-SL-C.pdf,1,https://www.chipdip.ru/product0/8023333076,60,60,https://aliexpress.ru/item/1005001994042589.html?sku_id=12000036214239182&spm=a2g2w.productlist.search_results.9.315e42dchTEPGb,37,37
+8,3,"P1, P3, P4",CONN_2,разъемы:CONN_2,разъемы:KF128-2P,,3,https://www.chipdip.ru/product/dg500-5.08-02p-14-00ah,38,114,https://aliexpress.ru/item/32979388954.html?sku_id=66712511350&spm=a2g2w.productlist.search_results.7.39313468UgQN0E,"13,3","39,9"
+9,1,P2,CONN_3,разъемы:CONN_3,разъемы:KF128-3P,,1,https://www.chipdip.ru/product/dg500-5.08-03p-14-00a-h,42,42,https://aliexpress.ru/item/32979388954.html?sku_id=66712511351&spm=a2g2w.productlist.search_results.7.39313468UgQN0E,"14,6","14,6"
+10,1,TR1,"ТПК-1 (9В, 0.17А )",Transformer:TEZ2.0-D-1,трансформаторы:ТПК-1,http://www.breve.pl/pdf/ANG/TEZ_ang.pdf,1,https://www.chipdip.ru/product/tpk-1-9v,540,540,https://www.chipdip.ru/product0/8010765633,320,320
+,,,,,,,,,,"796,2",,,"441,2"

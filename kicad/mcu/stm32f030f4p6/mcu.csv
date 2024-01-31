@@ -1,0 +1,17 @@
+Item,Qty,Reference(s),Value,ChipDip,Цена,Стоимость,Aliexpress,Цена 2,Стоимость
+1,4,"C1, C2, C4, C5",0.1,https://www.chipdip.ru/product0/9000649656,6,24,https://www.chipdip.ru/product0/9000649656,6,24
+2,2,"C3, C6",100.0x6.3V,https://www.chipdip.ru/product/tecap-100-mkf-6.3-v-tip-c-10,31,62,https://www.chipdip.ru/product/tecap-100-mkf-6.3-v-tip-c-10,31,62
+3,3,"D1, D2, D3",LED_RKGB,https://aliexpress.ru/item/1005004567358995.html?sku_id=12000029654169026&spm=.search_results.9.7b7656fb5HQw9i,14,42,https://aliexpress.ru/item/1005004567358995.html?sku_id=12000029654169026&spm=.search_results.9.7b7656fb5HQw9i,14,42
+4,1,J1,Conn_01x05,https://aliexpress.ru/item/1005004837211340.html?sku_id=12000030681544706&spm=a2g2w.productlist.search_results.0.3b0a9776GQj5r5,32,32,https://aliexpress.ru/item/1005004837211340.html?sku_id=12000030681544706&spm=a2g2w.productlist.search_results.0.3b0a9776GQj5r5,32,32
+5,1,J2,SWD,,0,0,,0,0
+6,2,"PB1, PB2",кнопка,https://www.chipdip.ru/product/kls7-ts6601-11.0-180-it-1102k,9,18,https://www.chipdip.ru/product/kls7-ts6601-11.0-180-it-1102k,9,18
+7,1,PB3,Reset,,0,0,,0,0
+8,1,Q1,BC817,https://www.chipdip.ru/product/bc817-16-hottech,4,4,https://www.chipdip.ru/product/bc817-16-hottech,4,4
+9,1,R1,10k,https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091297&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","0,47",https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091297&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","0,47"
+10,3,"R2, R5, R8",100,https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091249&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41",https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091249&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41"
+11,3,"R3, R6, R9",220,https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091257&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41",https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091257&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41"
+12,3,"R4, R7, R11",62,https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091244&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41",https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091244&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","1,41"
+13,1,R10,1k,https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091273&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","0,47",https://aliexpress.ru/item/1005001794416354.html?sku_id=12000017596091273&spm=a2g2w.stores.seller_list.7.69a430bb0rQLNk,"0,47","0,47"
+14,1,U1,LM1117-3.3,https://www.chipdip.ru/product/lm1117gs-3.3,21,21,https://www.chipdip.ru/product/lm1117gs-3.3,21,21
+15,1,U2,STM32F030F4P6,https://www.chipdip.ru/product/stm32f030f4p6tr-2?from=suggest_product,100,100,https://aliexpress.ru/item/1005006074715370.html?sku_id=12000035611654155&spm=a2g2w.productlist.search_results.4.82fb3e8cBxzujV,80,80
+,,,,,,"308,17",,,"288,17"
